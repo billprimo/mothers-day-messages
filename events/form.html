@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Γιορτή της Μητέρας - Στείλε Μήνυμα</title>
+    <style>
+        body { font-family: Arial, sans-serif; text-align: center; background-color: #ffe6e6; }
+        #messageForm { margin-top: 50px; }
+        textarea { width: 80%; height: 100px; }
+        button { padding: 10px 20px; margin-top: 10px; }
+        img { width: 150px; margin-top: 20px; }
+    </style>
+</head>
+<body>
+    <img src="Sephora-Logo.png" alt="Sephora Logo">
+    <h1>Στείλε ένα μήνυμα για τη Γιορτή της Μητέρας</h1>
+    <form id="messageForm">
+        <textarea id="message" placeholder="Γράψε το μήνυμά σου..."></textarea><br>
+        <button type="submit">Υποβολή</button>
+    </form>
+    <script>
+        document.getElementById('messageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const message = document.getElementById('message').value;
+            if (message.trim() === '') return;
+
+            // Αποθήκευση του μηνύματος στο local storage
+            const messages = JSON.parse(localStorage.getItem('messages') || '[]');
+            messages.push({ text: message, approved: false });
+            localStorage.setItem('messages', JSON.stringify(messages));
+
+            alert('Το μήνυμά σου στάλθηκε για έγκριση!');
+            document.getElementById('message').value = '';
+        });
+    </script>
+</body>
+</html>
